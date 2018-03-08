@@ -3,7 +3,7 @@
 //  Photo Map
 //
 //  Created by Alberto Nencioni on 03/07/18.
-//  Copyright (c) 2018 Alberto Nencioni. All rights reserved.
+//  Copyright © 2018 Alberto Nencioni. All rights reserved.
 //
 
 import UIKit

@@ -3,7 +3,7 @@
 //  Photo Map
 //
 //  Created by Alberto Nencioni on 03/07/18.
-//  Copyright (c) 2018 Alberto Nencioni. All rights reserved.
+//  Copyright © 2018 Alberto Nencioni. All rights reserved.
 //
 
 import UIKit
@@ -15,6 +15,8 @@ protocol LocationsViewControllerDelegate : class {
 
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
   
+  weak var delegate : LocationsViewControllerDelegate!
+  
   let CLIENT_ID = "QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL"
   let CLIENT_SECRET = "W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU"
   
@@ -22,8 +24,6 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
   @IBOutlet weak var searchBar: UISearchBar!
   
   var results: NSArray = []
-  
-  weak var delegate : LocationsViewControllerDelegate!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -58,14 +58,21 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     let lat = venue.value(forKeyPath: "location.lat") as! NSNumber
     let lng = venue.value(forKeyPath: "location.lng") as! NSNumber
     
+    
+    
     let latString = "\(lat)"
     let lngString = "\(lng)"
     
     print(latString + " " + lngString)
-  }
-  
-  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     
+    delegate.locationsPickedLocation(controller: self, latitude: lat, longitude: lng)
+    
+    for viewController in (self.navigationController?.viewControllers)! {
+      if (viewController is PhotoMapViewController) {
+        self.navigationController?.popToViewController(viewController, animated: true)
+        break;
+      }
+    }
   }
   
   func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

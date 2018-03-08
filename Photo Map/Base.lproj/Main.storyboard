@@ -45,6 +45,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Photo Map" id="aPF-0T-Ydb"/>
                     <connections>
+                        <outlet property="cameraButton" destination="m2y-V7-1Bu" id="y4E-dU-Clj"/>
                         <outlet property="mapView" destination="Kt1-Sv-2g7" id="DaR-C5-jcP"/>
                         <segue destination="eZf-Nb-6PU" kind="push" identifier="tagSegue" id="Tzv-N2-17x"/>
                         <segue destination="WeT-38-qba" kind="push" identifier="fullImageSegue" id="B5X-dM-HfZ"/>
